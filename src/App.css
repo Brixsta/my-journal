@@ -1,38 +1,197 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+*, html {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+  background-color: whitesmoke;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+}
+
+.journal-container {
+  height: 45rem;
+  width: 45rem;
+  border: solid 1px rgba(0,0,0,.4);
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 20px 20px 10px rgba(0,0,0,.1);
+}
+
+.journal-header {
+  height: 10%;
+  width: 100%;
+  background: #ff9966;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ff5e62, #ff9966);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ff5e62, #ff9966); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.journal-controls-container {
+  height: 15%;
+  width: 100%;
+  background: #ff9966;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ff5e62, #ff9966);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ff5e62, #ff9966); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-new-button, .save-changes-button {
+  border: 0;
+  padding: .5rem;
+  width: 9rem;
+  font-size: 1.3rem;
+  margin: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgb(240, 240, 240);
+  transition: all .2s ease-in-out;
+}
+
+.add-new-button:hover, .save-changes-button:hover {
+  background-color: black;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.save-changes-button[disabled] {
+  color: black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.save-changes-button[disabled]:hover {
+  background-color: black;
+  color: white;
+}
+
+.journal-posts-container {
+  width: 65%;
+  height: 75%;
+  background-color: rgb(240, 240, 240);
+  position: relative;
+}
+
+.post-deleted, .post-saved, .post-added {
+  padding: 1rem;
+  color: white;
+  position: absolute;
+  bottom: 40px;
+  left: 0px;
+  width: 93.2%;
+  text-align: center;
+}
+
+.deleted-message, .saving-message, .adding-message {
+  background-color: black;
+  padding: 1rem;
+  border-radius: 5px;
+  animation-name: fadeInAndOut;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+}
+
+@keyframes fadeInAndOut {
+  0% {
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
+
+
+.journal-posts-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.journal-text-area {
+  resize: none;
+  height: 90%;
+  width: 90%;
+  padding: 1rem;
+  box-sizing: border-box;
+  font-size: 1.5rem;
+  border: 0;
+  border: solid 1px rgba(0,0,0,.4);
+}
+
+.journal-text-area:focus {
+  outline: none;
+}
+
+.previous-posts-container {
+  height: 75%;
+  width: 35%;
+  background-color: rgb(240, 240, 240);
+  overflow-y: auto;
+  border-right: solid 1px rgba(0,0,0,.4);
+  box-sizing: border-box;
+}
+
+.previous-post-list {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0rem;
+  position: relative;
+}
+
+.previous-post-item-title {
+  background-color: #ff9966;
+  display: flex;
+  padding: 1.5rem;
+  margin: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 9rem;
+  justify-content: center;
+  align-items: center;
+  transition: all .2s ease-in;
+  user-select: none;
+}
+
+.previous-post-item-title:hover {
+  background-color: black;
+  color: white;
+}
+
+.delete-x {
+  font-weight: bolder;
+  font-size: 1rem;
+  position: absolute;
+  right: 30px;
+  margin-top: -82px;
+  cursor: pointer;
+  user-select: none;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  user-select: none;
+  border: 0;
+  background-color: inherit;
+}
+
+.delete-x:focus {
+  outline: none;
+}
+
