@@ -48,7 +48,7 @@ class JournalContainer extends React.Component {
             }
         }
 
-        const article = {content: ''}
+        const article = {content: ' '}
         await axios.post('http://localhost:9000/api/journal', article);
 
 
@@ -62,7 +62,6 @@ class JournalContainer extends React.Component {
             this.setState({postAdded: false})
         },1500)
     }
-
 
     async getContentByDate (date) {
         const res = await axios.get('http://localhost:9000/api/journal');
@@ -95,7 +94,11 @@ class JournalContainer extends React.Component {
         await axios.put(`http://localhost:9000/api/journal/${id}`, article);
         const res = await axios.get('http://localhost:9000/api/journal');
         let newText = res.data.filter(item => item.id === id);
-        this.setState({textAreaContent: newText[0].content, postSaving: true, postDeleted: false, postAdded: false});
+        if(!newText[0]) {
+            return;
+        } else {
+            this.setState({textAreaContent: newText[0].content, postSaving: true, postDeleted: false, postAdded: false});
+        }
         setTimeout(()=>{
             this.setState({postSaving: false})
         },1500)
@@ -104,16 +107,12 @@ class JournalContainer extends React.Component {
     async componentDidMount () {
         const res = await axios.get('http://localhost:9000/api/journal');
         let postDates = [];
-
-
         let sortedRes = res.data.sort((a,b)=>{
             return b.id-a.id;
         });
-
         for(let i=0; i<sortedRes.length; i++) {
             postDates.push(sortedRes[i].postdate.slice(0,10));
         }
-
         this.setState({postData: res.data, postDates: postDates});
     }
 

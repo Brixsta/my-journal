@@ -21,7 +21,6 @@ handleChange (evt) {
                     value={this.props.textAreaContent}
                     onChange={this.handleChange}
                     className="journal-text-area">
-                    
                     </textarea>
                 </form>
                 <div 
