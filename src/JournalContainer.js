@@ -35,7 +35,6 @@ class JournalContainer extends React.Component {
     }
 
     async addNewPost () {
-        
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -73,7 +72,7 @@ class JournalContainer extends React.Component {
         let content = res.data.filter((item)=>{
             return item.postdate.slice(0,10) === date.slice(0,10);
         });
-        this.setState({textAreaContent: content[0].content, saveDisabled: false})
+        this.setState({textAreaContent: content[0].content, saveDisabled: false});
     }
 
     async deletePostByDate (date) {
@@ -84,12 +83,13 @@ class JournalContainer extends React.Component {
         this.setState({postDates: newPostDates, textAreaContent:'', postDeleted: true, postSaving: false, postAdded: false});
         setTimeout(()=>{
             this.setState({postDeleted: false})
-        },2000)
+        },2000);
     }
 
-    getPostIdByDate (date) {
-        let post = this.state.postData.filter(item => item.postdate.slice(0,10) === date.slice(0,10));
-        this.setState({currentPostId: post[0].id});
+    async getPostIdByDate (date) {
+        const res = await axios.get('http://localhost:9000/api/journal');
+        let post = res.data.filter(item => item.postdate.slice(0,10) === date.slice(0,10));
+        this.setState({currentPostId: post[0].id, saveDisabled: false})
     }
 
     async saveChangesToPost () {
@@ -99,11 +99,12 @@ class JournalContainer extends React.Component {
         await axios.put(`http://localhost:9000/api/journal/${id}`, article);
         const res = await axios.get('http://localhost:9000/api/journal');
         let newText = res.data.filter(item => item.id === id);
+
         if(!newText[0]) {
             return;
-        } else {
-            this.setState({textAreaContent: newText[0].content, postSaving: true, postDeleted: false, postAdded: false});
-        }
+        } 
+        this.setState({textAreaContent: newText[0].content, postSaving: true, postDeleted: false, postAdded: false});
+        
         setTimeout(()=>{
             this.setState({postSaving: false})
         },2000)
