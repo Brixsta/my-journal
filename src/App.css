@@ -34,6 +34,8 @@
   justify-content: center;
   align-items: center;
   font-size: 2rem;
+  color: white; 
+  user-select: none;
 }
 
 .journal-controls-container {
@@ -55,21 +57,25 @@
   margin: 1rem;
   border-radius: 5px;
   cursor: pointer;
-  background-color: rgb(240, 240, 240);
+  background-color: white;
+  color: #ff5500;
   transition: all .2s ease-in-out;
+  border: solid 2px white;
+  user-select: none;
 }
 
 .add-new-button:hover, .save-changes-button:hover {
-  background-color: black;
+  background-color: #ff5500;
   color: white;
+  border: solid 2px white;
 }
 
 .save-changes-button[disabled] {
-  color: black;
+  color: #ff5500;
 }
 
 .save-changes-button[disabled]:hover {
-  background-color: black;
+  background-color: #ff5500;
   color: white;
 }
 
@@ -80,7 +86,7 @@
   position: relative;
 }
 
-.post-deleted, .post-saved, .post-added {
+.post-deleted, .post-saved, .post-added, .post-limit {
   padding: 1rem;
   color: white;
   position: absolute;
@@ -90,12 +96,12 @@
   text-align: center;
 }
 
-.deleted-message, .saving-message, .adding-message {
+.deleted-message, .saving-message, .adding-message, .limit-message {
   background-color: black;
   padding: 1rem;
   border-radius: 5px;
   animation-name: fadeInAndOut;
-  animation-duration: 1.5s;
+  animation-duration: 2s;
   animation-timing-function: ease-in-out;
   opacity: 0;
 }
@@ -136,6 +142,11 @@
   outline: none;
 }
 
+.journal-text-area::selection {
+  background-color: #ff5500;
+  color: white;
+}
+
 .previous-posts-container {
   height: 75%;
   width: 35%;
@@ -158,7 +169,9 @@
 }
 
 .previous-post-item-title {
-  background-color: #ff9966;
+  background-color: white;
+  border: solid 2px #ff5500;
+  color: #ff5500;
   display: flex;
   padding: 1.5rem;
   margin: 1rem;
@@ -172,7 +185,7 @@
 }
 
 .previous-post-item-title:hover {
-  background-color: black;
+  background-color: #ff5500;
   color: white;
 }
 
@@ -180,15 +193,17 @@
   font-weight: bolder;
   font-size: 1rem;
   position: absolute;
-  right: 30px;
-  margin-top: -82px;
+  right: 28px;
+  margin-top: -85.5px;
   cursor: pointer;
   user-select: none;
-  color: white;
+  color: black;
+  background-color: inherit;
   font-family: 'Montserrat', sans-serif;
   user-select: none;
   border: 0;
-  background-color: inherit;
+  z-index: 10;
+  border-radius: 5px;
 }
 
 .delete-x:focus {

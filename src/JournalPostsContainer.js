@@ -44,6 +44,13 @@ handleChange (evt) {
                     New post has been added.
                     </span>
                 </div>
+                <div 
+                style={{display: this.props.postLimitReached ? 'block' : 'none'}}
+                className="post-limit">
+                    <span className={this.props.postLimitReached ? "limit-message" : ''}>
+                    You may only add one post per day.
+                    </span>
+                </div>
             </div>
         )
     }

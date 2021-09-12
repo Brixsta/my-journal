@@ -18,7 +18,8 @@ class JournalContainer extends React.Component {
             saveDisabled: true,
             postDeleted: false,
             postSaving: false,
-            postAdded: false
+            postAdded: false,
+            postLimitReached: false
         }
 
         this.updateTextAreaContent = this.updateTextAreaContent.bind(this);
@@ -34,6 +35,7 @@ class JournalContainer extends React.Component {
     }
 
     async addNewPost () {
+        
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -43,16 +45,19 @@ class JournalContainer extends React.Component {
 
         for(let i=0; i<this.state.postDates.length; i++) {
             if(this.state.postDates[i].slice(0,10) === today) {
-                alert('Only 1 Journal Post per day');
+                {this.setState({postLimitReached: true})}
+                setTimeout(()=>{
+                    this.setState({postLimitReached: false})
+                }, 2000)
                 return;
-            }
+            } 
         }
 
         const article = {content: ' '}
         await axios.post('http://localhost:9000/api/journal', article);
 
 
-        this.setState({textAreaContent: '', saveDisabled: false});
+        this.setState({textAreaContent: '***NEW POST TYPE STUFF HERE***', saveDisabled: false});
 
         const res = await axios.get('http://localhost:9000/api/journal');
         const newEntry = res.data[res.data.length-1];
@@ -60,7 +65,7 @@ class JournalContainer extends React.Component {
         this.setState({postData: [...this.state.postData, newEntry], postDates: [newEntry.postdate.slice(0,10), ...this.state.postDates], currentPostId: newEntry.id, postDeleted: false, postSaving: false, postAdded: true});
         setTimeout(()=>{
             this.setState({postAdded: false})
-        },1500)
+        },2000)
     }
 
     async getContentByDate (date) {
@@ -79,7 +84,7 @@ class JournalContainer extends React.Component {
         this.setState({postDates: newPostDates, textAreaContent:'', postDeleted: true, postSaving: false, postAdded: false});
         setTimeout(()=>{
             this.setState({postDeleted: false})
-        },1500)
+        },2000)
     }
 
     getPostIdByDate (date) {
@@ -101,7 +106,7 @@ class JournalContainer extends React.Component {
         }
         setTimeout(()=>{
             this.setState({postSaving: false})
-        },1500)
+        },2000)
     }
 
     async componentDidMount () {
@@ -132,6 +137,7 @@ class JournalContainer extends React.Component {
                 postDeleted={this.state.postDeleted}
                 postSaving={this.state.postSaving}
                 postAdded={this.state.postAdded}
+                postLimitReached={this.state.postLimitReached}
                 />
                 <JournalControlsContainer 
                 addNewPost={this.addNewPost}
