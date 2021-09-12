@@ -72,7 +72,6 @@
 
 .save-changes-button[disabled] {
   color: #ff5500;
-  background-color: black;
 }
 
 .save-changes-button[disabled]:hover {
