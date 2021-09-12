@@ -57,7 +57,7 @@ class JournalContainer extends React.Component {
         await axios.post('http://localhost:9000/api/journal', article);
 
 
-        this.setState({textAreaContent: '***NEW POST TYPE STUFF HERE***', saveDisabled: false});
+        this.setState({textAreaContent: ' ', saveDisabled: false});
 
         const res = await axios.get('http://localhost:9000/api/journal');
         const newEntry = res.data[res.data.length-1];
