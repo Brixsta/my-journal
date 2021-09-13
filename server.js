@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require('express');
 const app = express();
-const db = require('./db/db_configuration');
+const db = require('./src/db/db_configuration');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -69,8 +69,6 @@ app.delete('/api/journal/:id', (req,res)=>{
     })
 });
 
-const PORT = process.env.PORT || 9000;
-
-app.listen(PORT, () => {
+app.listen(process.env.PORT, () => {
     console.log('listening on Port 9000');
 });
