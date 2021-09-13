@@ -46,7 +46,10 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "server.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "favicons-webpack-plugin": "^5.0.2",
+    "webpack-pwa-manifest": "^4.3.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Brixsta/my-journal.git"
