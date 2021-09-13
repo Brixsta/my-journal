@@ -69,6 +69,8 @@ app.delete('/api/journal/:id', (req,res)=>{
     })
 });
 
-app.listen(process.env.PORT, () => {
+const PORT = process.env.PORT || 9000;
+
+app.listen(PORT, () => {
     console.log('listening on Port 9000');
 });
