@@ -24,6 +24,9 @@ app.get('/api/journal', (req,res)=>{
     })
 });
 
+
+console.log(process.env.PORT, 'here it is')
+
 app.post('/api/journal/', (req,res)=>{
     const {content} = req.body;
 
