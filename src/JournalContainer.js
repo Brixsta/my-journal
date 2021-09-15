@@ -42,18 +42,6 @@ class JournalContainer extends React.Component {
 
         today = yyyy + '-' + mm + '-' + dd;
 
-        const response = await axious.get('/api/journal');
-        
-        for(let j=0; j<response.data.length; j++) {
-            if(response.data[j].postDates.slice(0,10) === today) {
-                {this.setState({postLimitReached: true})}
-                setTimeout(()=>{
-                    this.setState({postLimitReached: false})
-                }, 2000)
-                return;
-            }
-        }
-
         for(let i=0; i<this.state.postDates.length; i++) {
             if(this.state.postDates[i].slice(0,10) === today) {
                 {this.setState({postLimitReached: true})}
